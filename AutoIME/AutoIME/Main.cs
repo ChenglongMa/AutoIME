@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 using AcadApplication = Autodesk.AutoCAD.ApplicationServices.Application;
 
 
@@ -15,17 +15,27 @@ namespace AutoIME
 {
     public class Main
     {
-        public static readonly string AppName = Assembly.GetEntryAssembly().GetName().Name;
+        public const string AppName = "AutoIME";
         public static readonly Editor Editor = AcadApplication.DocumentManager.MdiActiveDocument.Editor;
-
-        private static readonly Setup setup = new Setup();
 
         [CommandMethod("iAutoIME")]
         [CommandMethod("pvuf")]
-        [CommandMethod("anzhuang")]
+        [CommandMethod("azAutoIME")]
         public static void Install()
         {
             Editor.WriteMessage("================<<安装开始>>================");
+            Register();
+            Editor.WriteMessage("================<<安装完成>>================");
+        }
+
+        [CommandMethod("uAutoIME")]
+        [CommandMethod("rhfa")]
+        [CommandMethod("xzAutoIME")]
+        public static void Uninstall()
+        {
+            Editor.WriteMessage("================<<卸载开始>>================");
+            UnregisterApp();
+            Editor.WriteMessage("================<<卸载完成>>================");
         }
 
 
@@ -35,7 +45,7 @@ namespace AutoIME
             Editor.WriteMessage("================<<注册开始>>================");
             try
             {
-                setup.Register(AppName);
+                Setup.Register(AppName);
             }
             catch
             {
@@ -47,16 +57,22 @@ namespace AutoIME
         [CommandMethod("UnregisterAutoIME")]
         public static void UnregisterApp()
         {
-            Editor.WriteMessage("================<<卸载开始>>================");
+            Editor.WriteMessage("================<<注销开始>>================");
             try
             {
-                setup.Unregister(AppName);
+                Setup.Unregister(AppName);
             }
             catch
             {
-                Editor.WriteMessage("================<<卸载失败>>================");
+                Editor.WriteMessage("================<<注销失败>>================");
             }
-            Editor.WriteMessage("================<<卸载成功>>================");
+            Editor.WriteMessage("================<<注销成功>>================");
+        }
+
+        [CommandMethod("SetIME")]
+        public static void Config()
+        {
+            new ConfigForm().ShowDialog();
         }
 
     }

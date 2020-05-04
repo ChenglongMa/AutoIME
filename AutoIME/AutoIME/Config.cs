@@ -45,7 +45,15 @@ namespace AutoIME
 
         public void Switch2IME(string commandName)
         {
-            throw new NotImplementedException();
+            var txtCmds = Properties.Settings.Default.TextCommands;
+            if (txtCmds.Contains(commandName.Trim().ToUpper()))
+            {
+                Switch2TextIME();
+            }
+            else
+            {
+                Switch2CommandIME();
+            }
         }
     }
 }

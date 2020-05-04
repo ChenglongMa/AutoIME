@@ -12,10 +12,11 @@ using AcadWindows = Autodesk.AutoCAD.Windows;
 
 namespace AutoIME
 {
-    class Setup
+    static class Setup
     {
-        private readonly Config _config = Config.GetConfigInstance();
-        private RegistryKey GetRootKey()
+        private static Config _config = Config.GetConfigInstance();
+
+        private static RegistryKey GetRootKey()
         {
             // Get Registry key
             var rootKey = HostApplicationServices.Current.MachineRegistryProductRootKey;
@@ -23,7 +24,7 @@ namespace AutoIME
             return regAcadProdKey.OpenSubKey("Applications", true);
         }
 
-        public void Register(string appName)
+        public static void Register(string appName)
         {
             // Get Registry key
 
@@ -47,7 +48,7 @@ namespace AutoIME
             regAcadAppKey.Close();
         }
 
-        public void Unregister(string appName)
+        public static void Unregister(string appName)
         {
             var regAcadProdKey = GetRootKey();
             var regAcadAppKey = regAcadProdKey.OpenSubKey("Applications", true);
@@ -55,7 +56,7 @@ namespace AutoIME
             regAcadAppKey.Close();
         }
 
-        public void BindCommandToDoc(AcadDocument doc)
+        public static void BindCommandToDoc(AcadDocument doc)
         {
             doc.CommandWillStart += new CommandEventHandler(CommandWillStart);
             doc.CommandEnded += new CommandEventHandler(CommandEnded);
@@ -63,22 +64,22 @@ namespace AutoIME
             doc.CommandFailed += new CommandEventHandler(CommandFailed);
         }
 
-        private void CommandFailed(object sender, CommandEventArgs e)
+        private static void CommandFailed(object sender, CommandEventArgs e)
         {
             _config.Switch2CommandIME();
         }
 
-        private void CommandCancelled(object sender, CommandEventArgs e)
+        private static void CommandCancelled(object sender, CommandEventArgs e)
         {
             _config.Switch2CommandIME();
         }
 
-        private void CommandEnded(object sender, CommandEventArgs e)
+        private static void CommandEnded(object sender, CommandEventArgs e)
         {
             _config.Switch2CommandIME();
         }
 
-        private void CommandWillStart(object sender, CommandEventArgs e)
+        private static void CommandWillStart(object sender, CommandEventArgs e)
         {
             var cmdName = e.GlobalCommandName;
             _config.Switch2IME(cmdName);
