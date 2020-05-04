@@ -51,7 +51,7 @@
             // btnOK
             // 
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(12, 389);
+            this.btnOK.Location = new System.Drawing.Point(30, 389);
             this.btnOK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(81, 32);
@@ -63,7 +63,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(308, 389);
+            this.btnCancel.Location = new System.Drawing.Point(286, 389);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(81, 32);
@@ -98,7 +98,7 @@
             this.lblEngCheck.AutoSize = true;
             this.lblEngCheck.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblEngCheck.ForeColor = System.Drawing.Color.DarkTurquoise;
-            this.lblEngCheck.Location = new System.Drawing.Point(327, 24);
+            this.lblEngCheck.Location = new System.Drawing.Point(322, 24);
             this.lblEngCheck.Name = "lblEngCheck";
             this.lblEngCheck.Size = new System.Drawing.Size(41, 28);
             this.lblEngCheck.TabIndex = 1;
@@ -110,7 +110,7 @@
             this.lblChiCheck.AutoSize = true;
             this.lblChiCheck.Font = new System.Drawing.Font("SimSun", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblChiCheck.ForeColor = System.Drawing.Color.DarkTurquoise;
-            this.lblChiCheck.Location = new System.Drawing.Point(327, 73);
+            this.lblChiCheck.Location = new System.Drawing.Point(322, 73);
             this.lblChiCheck.Name = "lblChiCheck";
             this.lblChiCheck.Size = new System.Drawing.Size(41, 28);
             this.lblChiCheck.TabIndex = 1;
@@ -133,12 +133,12 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(149, 389);
+            this.btnReset.Location = new System.Drawing.Point(357, 24);
             this.btnReset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(81, 32);
+            this.btnReset.Size = new System.Drawing.Size(44, 81);
             this.btnReset.TabIndex = 0;
-            this.btnReset.Text = "重置";
+            this.btnReset.Text = "重\n置";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
@@ -149,7 +149,7 @@
             this.status});
             this.statusStrip1.Location = new System.Drawing.Point(0, 423);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(401, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(409, 26);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -217,14 +217,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(401, 449);
+            this.ClientSize = new System.Drawing.Size(409, 449);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblChiCheck);
             this.Controls.Add(this.lblEngCheck);
-            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnChiCheck);
             this.Controls.Add(this.btnEngCheck);

@@ -1,8 +1,6 @@
 ﻿//using AutoIME.Properties;
 using AutoIME.Properties;
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -21,19 +19,28 @@ namespace AutoIME
                 _cmds.Add(cmd);
             }
             lbxCmds.DataSource = _cmds;
+            var engDone = !string.IsNullOrEmpty(Settings.Default.CommandIMECulture);
+            SetEngIME(engDone);
+            var chnDone = !string.IsNullOrEmpty(Settings.Default.TextIMECulture);
+            SetChnIME(chnDone);
         }
 
         private void SetEngIME(bool done)
         {
             lblEngCheck.Visible = done;
             btnEngCheck.Enabled = !done;
+            var txt = done ? "英文输入法已设置" : "请切换至英文输入法，然后单击该按钮";
+            btnEngCheck.Text = txt;
         }
 
         private void SetChnIME(bool done)
         {
             lblChiCheck.Visible = done;
             btnChiCheck.Enabled = !done;
+            var txt = done ? "中文输入法已设置" : "请切换至中文输入法，然后单击该按钮";
+            btnChiCheck.Text = txt;
         }
+
         private void btnEngCheck_Click(object sender, EventArgs e)
         {
             _config.CommandIME = InputLanguage.CurrentInputLanguage;

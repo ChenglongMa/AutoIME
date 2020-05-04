@@ -1,10 +1,6 @@
 ﻿using AutoIME.Properties;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AutoIME
@@ -32,19 +28,49 @@ namespace AutoIME
             return config;
         }
 
+        public void Initialize()
+        {
+            DefaultIME = InputLanguage.CurrentInputLanguage;
+            var cmdCulture = Settings.Default.CommandIMECulture;
+            if (!string.IsNullOrEmpty(cmdCulture))
+            {
+                CommandIME = InputLanguage.FromCulture(CultureInfo.GetCultureInfo(cmdCulture));
+            }
+            var txtCulture = Settings.Default.TextIMECulture;
+            if (!string.IsNullOrEmpty(txtCulture))
+            {
+                TextIME = InputLanguage.FromCulture(CultureInfo.GetCultureInfo(txtCulture));
+            }
+
+        }
 
         public void Switch2CommandIME()
         {
-            var cultureName = Settings.Default.CommandIMECulture;
-            CommandIME = InputLanguage.FromCulture(CultureInfo.GetCultureInfo(cultureName));
-            InputLanguage.CurrentInputLanguage = CommandIME;
+            var cmdCulture = Settings.Default.CommandIMECulture;
+            if (!string.IsNullOrEmpty(cmdCulture))
+            {
+                CommandIME = InputLanguage.FromCulture(CultureInfo.GetCultureInfo(cmdCulture));
+                InputLanguage.CurrentInputLanguage = CommandIME;
+            }
+            else
+            {
+                Program.Editor.WriteMessage("无法切换语言，请使用'SetIME'命令设置\n");
+            }
         }
 
         public void Switch2TextIME()
         {
-            var cultureName = Settings.Default.TextIMECulture;
-            TextIME = InputLanguage.FromCulture(CultureInfo.GetCultureInfo(cultureName));
-            InputLanguage.CurrentInputLanguage = TextIME;
+            var txtCulture = Settings.Default.TextIMECulture;
+            if (!string.IsNullOrEmpty(txtCulture))
+            {
+                TextIME = InputLanguage.FromCulture(CultureInfo.GetCultureInfo(txtCulture));
+                InputLanguage.CurrentInputLanguage = TextIME;
+            }
+            else
+            {
+                Program.Editor.WriteMessage("无法切换语言，请使用'SetIME'命令设置\n");
+            }
+
         }
 
         public void Switch2DefaultIME()

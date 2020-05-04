@@ -2,13 +2,9 @@
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Runtime;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using AcadDocument = Autodesk.AutoCAD.ApplicationServices.Document;
-using AcadWindows = Autodesk.AutoCAD.Windows;
 
 namespace AutoIME
 {
@@ -56,12 +52,35 @@ namespace AutoIME
             regAcadAppKey.Close();
         }
 
-        public static void BindCommandToDoc(AcadDocument doc)
+        public static void InitialBinding()
         {
-            doc.CommandWillStart += new CommandEventHandler(CommandWillStart);
-            doc.CommandEnded += new CommandEventHandler(CommandEnded);
-            doc.CommandCancelled += new CommandEventHandler(CommandCancelled);
-            doc.CommandFailed += new CommandEventHandler(CommandFailed);
+            Application.QuitWillStart += QuitWillStart;
+            Application.DocumentManager.DocumentCreated += DocumentManager_DocumentCreated;
+            BindCommandToDoc(Application.DocumentManager.MdiActiveDocument);
+        }
+
+        private static void DocumentManager_DocumentCreated(object sender, DocumentCollectionEventArgs e)
+        {
+            BindCommandToDoc(Application.DocumentManager.MdiActiveDocument);
+        }
+
+        private static void BindCommandToDoc(AcadDocument doc)
+        {
+            UnbindCommandToDoc(doc);
+            doc.CommandWillStart += CommandWillStart;
+            doc.CommandEnded += CommandEnded;
+            doc.CommandCancelled += CommandCancelled;
+            doc.CommandFailed += CommandFailed;
+        }
+
+        private static void DocumentManager_DocumentDestroyed(object sender, DocumentDestroyedEventArgs e)
+        {
+            _config.Switch2DefaultIME();
+        }
+
+        private static void QuitWillStart(object sender, EventArgs e)
+        {
+            _config.Switch2DefaultIME();
         }
 
         public static void UnbindCommandToDoc(AcadDocument doc)
