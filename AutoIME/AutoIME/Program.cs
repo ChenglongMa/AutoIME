@@ -104,11 +104,5 @@ namespace AutoIME
             _config.Switch2DefaultIME();
 
         }
-
-        [CommandMethod("showime")]
-        public void test()
-        {
-            Editor.WriteMessage(_config.DefaultIME.Culture.DisplayName);
-        }
     }
 }
