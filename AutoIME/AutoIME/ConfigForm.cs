@@ -1,12 +1,10 @@
-﻿using AutoIME.Properties;
+﻿//using AutoIME.Properties;
+using AutoIME.Properties;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AutoIME
@@ -14,6 +12,7 @@ namespace AutoIME
     public partial class ConfigForm : Form
     {
         private readonly BindingList<string> _cmds = new BindingList<string>();
+        private readonly Config _config = Config.GetConfigInstance();
         public ConfigForm()
         {
             InitializeComponent();
@@ -37,19 +36,23 @@ namespace AutoIME
         }
         private void btnEngCheck_Click(object sender, EventArgs e)
         {
+            _config.CommandIME = InputLanguage.CurrentInputLanguage;
             SetEngIME(true);
-            status.Text = $"已将英文输入法设置为 {InputLanguage.CurrentInputLanguage.Culture.DisplayName}";
+            status.Text = $"已将英文输入法设置为 {_config.CommandIME.Culture.DisplayName}";
         }
 
         private void btnChiCheck_Click(object sender, EventArgs e)
         {
+            _config.TextIME = InputLanguage.CurrentInputLanguage;
             SetChnIME(true);
-            status.Text = $"已将中文输入法设置为 {InputLanguage.CurrentInputLanguage.Culture.DisplayName}";
+            status.Text = $"已将中文输入法设置为 {_config.TextIME.Culture.DisplayName}";
 
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            _config.TextIME = null;
+            _config.CommandIME = null;
             SetEngIME(false);
             SetChnIME(false);
             status.Text = "就绪";
@@ -79,15 +82,12 @@ namespace AutoIME
             _cmds.RemoveAt(id);
         }
 
-        private void RefreshCommandSettings()
-        {
-            Settings.Default.TextCommands.Clear();
-            Settings.Default.TextCommands.AddRange(_cmds.ToArray());
-            Settings.Default.Save();
-        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
-            RefreshCommandSettings();
+            _config.ResetCommandsSettings(_cmds.ToArray());
+            _config.SetIMEs();
+            Close();
         }
     }
 }

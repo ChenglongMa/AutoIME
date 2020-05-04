@@ -64,6 +64,14 @@ namespace AutoIME
             doc.CommandFailed += new CommandEventHandler(CommandFailed);
         }
 
+        public static void UnbindCommandToDoc(AcadDocument doc)
+        {
+            doc.CommandWillStart -= new CommandEventHandler(CommandWillStart);
+            doc.CommandEnded -= new CommandEventHandler(CommandEnded);
+            doc.CommandCancelled -= new CommandEventHandler(CommandCancelled);
+            doc.CommandFailed -= new CommandEventHandler(CommandFailed);
+        }
+
         private static void CommandFailed(object sender, CommandEventArgs e)
         {
             _config.Switch2CommandIME();

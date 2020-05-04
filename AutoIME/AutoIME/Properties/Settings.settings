@@ -3,7 +3,17 @@
   <Profiles />
   <Settings>
     <Setting Name="TextCommands" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;LINE&lt;/string&gt;
+  &lt;string&gt;TEXT&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="CommandIMECulture" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TextIMECulture" Type="System.String" Scope="User">
+      <Value Profile="(Default)">zh-CN</Value>
     </Setting>
   </Settings>
 </SettingsFile>
