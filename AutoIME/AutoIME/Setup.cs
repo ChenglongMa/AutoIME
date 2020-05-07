@@ -80,7 +80,7 @@ namespace AutoIME
 
         private static void QuitWillStart(object sender, EventArgs e)
         {
-            _config.Switch2DefaultIME();
+            Program.TearDown();
         }
 
         public static void UnbindCommandToDoc(AcadDocument doc)
