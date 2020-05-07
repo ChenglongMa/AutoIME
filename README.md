@@ -1,8 +1,18 @@
 # AutoIME 使用说明
 
+## 下载
+
+最新版本：https://github.com/ChenglongMa/AutoIME/releases/download/v1.0/AutoIME_v1.0.zip
+
+## 系统要求
+
+**系统**：win7 及以上
+
+**AutoCAD**: AutoCAD 2021，理论兼容低版本（待测试）
+
 ## 安装
 
-1. 将 AutoIME.zip 解压至任意文件夹；
+1. 将 AutoIME_[版本号].zip 解压至任意文件夹；
 
 2. 启动 AutoCAD 2021，输入 `NETLOAD` 命令加载 DLL，找到 **AutoIME.dll**，单击**打开**；
 
